@@ -2,199 +2,630 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>My Developer Portfolio</title>
+    <title>AI Portfolio & Chatbot Assistant</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #020617;
+        --bg-elevated: #020617;
+        --border-subtle: #1f2937;
+        --accent: #6366f1;
+        --accent-soft: rgba(99, 102, 241, 0.15);
+        --accent-strong: rgba(129, 140, 248, 0.4);
+        --fg-primary: #e5e7eb;
+        --fg-muted: #9ca3af;
+        --radius-lg: 18px;
+        --radius-md: 12px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: radial-gradient(circle at top left, #1e293b 0, #020617 55%, #000 100%);
+        color: var(--fg-primary);
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+      }
+
+      .shell {
+        width: 100%;
+        max-width: 1120px;
+        padding: 20px 18px 26px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.7));
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        backdrop-filter: blur(16px);
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.85);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .brand-mark {
+        height: 36px;
+        width: 36px;
+        border-radius: 999px;
+        background: radial-gradient(circle at 20% 10%, #38bdf8, #6366f1 45%, #a855f7 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        font-size: 20px;
+        box-shadow: 0 0 24px rgba(96, 165, 250, 0.85);
+      }
+
+      .brand-text {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .brand-title {
+        font-size: 15px;
+        font-weight: 600;
+      }
+
+      .brand-subtitle {
+        font-size: 12px;
+        color: var(--fg-muted);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 8px;
+        font-size: 12px;
+      }
+
+      .nav-links a {
+        color: var(--fg-muted);
+        text-decoration: none;
+        padding: 4px 8px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+      }
+
+      .nav-links a:hover {
+        border-color: rgba(148, 163, 184, 0.6);
+        color: var(--fg-primary);
+        background: rgba(15, 23, 42, 0.9);
+      }
+
+      .main-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+        gap: 18px;
+        align-items: stretch;
+      }
+
+      .card {
+        position: relative;
+        border-radius: var(--radius-lg);
+        padding: 18px 18px 16px;
+        background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 55%),
+          var(--bg-elevated);
+        border: 1px solid var(--border-subtle);
+        box-shadow: 0 20px 45px rgba(15, 23, 42, 0.9);
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top right, rgba(129, 140, 248, 0.3), transparent 60%);
+        mix-blend-mode: soft-light;
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      .card h2 {
+        margin: 0 0 6px;
+        font-size: 20px;
+      }
+
+      .card p {
+        margin: 0;
+      }
+
+      .hero {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        border-radius: 999px;
+        padding: 3px 9px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        background: rgba(15, 23, 42, 0.9);
+        color: var(--fg-muted);
+        width: fit-content;
+      }
+
+      .hero-title {
+        font-size: clamp(24px, 3vw, 30px);
+        font-weight: 700;
+        letter-spacing: 0.01em;
+      }
+
+      .hero-subtitle {
+        font-size: 14px;
+        color: var(--fg-muted);
+        max-width: 36rem;
+      }
+
+      .hero-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        font-size: 11px;
+      }
+
+      .chip {
+        border-radius: 999px;
+        padding: 3px 9px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        background: rgba(15, 23, 42, 0.8);
+        color: var(--fg-muted);
+      }
+
+      .hero-actions {
+        margin-top: 8px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .btn {
+        border-radius: 999px;
+        border: 1px solid transparent;
+        padding: 7px 14px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        text-decoration: none;
+        color: var(--fg-primary);
+        background: rgba(15, 23, 42, 0.9);
+        transition: all 0.15s ease;
+      }
+
+      .btn-primary {
+        background: radial-gradient(circle at 10% 0, #38bdf8 0, #6366f1 45%, #a855f7 90%);
+        border-color: rgba(191, 219, 254, 0.25);
+        box-shadow: 0 14px 35px rgba(56, 189, 248, 0.5);
+        color: white;
+      }
+
+      .btn-outline {
+        border-color: rgba(148, 163, 184, 0.4);
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 14px 32px rgba(15, 23, 42, 0.9);
+      }
+
+      .sections {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 10px;
+        font-size: 12px;
+      }
+
+      .section-card {
+        border-radius: 14px;
+        padding: 9px 10px;
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(31, 41, 55, 0.9);
+      }
+
+      .section-card h3 {
+        margin: 0 0 4px;
+        font-size: 13px;
+      }
+
+      .section-card ul {
+        margin: 0;
+        padding-left: 16px;
+        color: var(--fg-muted);
+      }
+
+      /* Chat panel */
+
+      .chat-panel {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .chat-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .chat-header h2 {
+        font-size: 16px;
+        margin: 0;
+      }
+
+      .chat-tagline {
+        font-size: 11px;
+        color: var(--fg-muted);
+      }
+
+      .chat-settings {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px 8px;
+        font-size: 11px;
+        padding: 7px 8px;
+        border-radius: 12px;
+        background: rgba(15, 23, 42, 0.95);
+        border: 1px dashed rgba(55, 65, 81, 0.9);
+      }
+
+      .chat-settings label {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .chat-settings input {
+        font: inherit;
+        padding: 4px 6px;
+        border-radius: 7px;
+        border: 1px solid rgba(55, 65, 81, 0.9);
+        background: rgba(15, 23, 42, 0.95);
+        color: var(--fg-primary);
+      }
+
+      .chat-settings input:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 1px var(--accent-strong);
+      }
+
+      .chat-window {
+        flex: 1;
+        min-height: 200px;
+        max-height: 360px;
+        border-radius: var(--radius-md);
+        border: 1px solid rgba(31, 41, 55, 0.95);
+        background: radial-gradient(circle at top, rgba(15, 23, 42, 0.98), #020617);
+        padding: 8px 9px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        overflow-y: auto;
+        font-size: 12px;
+      }
+
+      .chat-message {
+        max-width: 88%;
+        padding: 6px 8px;
+        border-radius: 10px;
+        border: 1px solid rgba(31, 41, 55, 0.9);
+        background: rgba(15, 23, 42, 0.95);
+        white-space: pre-wrap;
+      }
+
+      .chat-message.user {
+        margin-left: auto;
+        background: var(--accent-soft);
+        border-color: rgba(129, 140, 248, 0.8);
+      }
+
+      .chat-message.assistant {
+        margin-right: auto;
+      }
+
+      .chat-input-row {
+        display: flex;
+        gap: 6px;
+        margin-top: 6px;
+      }
+
+      .chat-input-row textarea {
+        flex: 1;
+        min-height: 48px;
+        max-height: 80px;
+        resize: vertical;
+        font: inherit;
+        padding: 6px 7px;
+        border-radius: 10px;
+        border: 1px solid rgba(55, 65, 81, 0.9);
+        background: rgba(15, 23, 42, 0.95);
+        color: var(--fg-primary);
+      }
+
+      .chat-input-row textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 1px var(--accent-strong);
+      }
+
+      .chat-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 11px;
+        color: var(--fg-muted);
+        margin-top: 4px;
+      }
+
+      .status {
+        font-size: 11px;
+      }
+
+      @media (max-width: 900px) {
+        .shell {
+          max-width: 100%;
+          padding: 14px 10px 22px;
+        }
+        .main-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      @media (max-width: 640px) {
+        .brand-subtitle {
+          display: none;
+        }
+        .top-bar {
+          border-radius: 18px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div class="app-shell">
+    <div class="shell">
       <header class="top-bar">
         <div class="brand">
-          <div class="brand-mark">P</div>
+          <div class="brand-mark">AI</div>
           <div class="brand-text">
-            <div class="brand-title">Portfolio Hub</div>
-            <div class="brand-subtitle">Profiles, projects & AI resume</div>
+            <div class="brand-title">AI & Data Science Portfolio</div>
+            <div class="brand-subtitle">Developer · Problem Solver · Learner</div>
           </div>
         </div>
+        <nav class="nav-links">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#chat">AI Chatbot</a>
+        </nav>
       </header>
 
-      <main class="main-layout">
-        <section class="card profile-card">
-          <h2>Profile & Links</h2>
-          <p class="section-help">
-            Add your handles and links. This page will show them as a clean
-            portfolio and use them as context for your AI‑generated resume.
-          </p>
-
-          <form id="profile-form" class="form-grid">
-            <div class="field">
-              <label for="fullName">Full name</label>
-              <input id="fullName" name="fullName" type="text" placeholder="Ada Lovelace" />
+      <main class="main-grid">
+        <!-- Left: Professional profile -->
+        <section class="card">
+          <div class="hero" id="about">
+            <div class="hero-badge">
+              <span>Available for internships & roles in AI / DS</span>
             </div>
-
-            <div class="field">
-              <label for="headline">Headline</label>
-              <input
-                id="headline"
-                name="headline"
-                type="text"
-                placeholder="Full‑stack developer | React, Node, AI"
-              />
-            </div>
-
-            <div class="field">
-              <label for="github">GitHub username</label>
-              <input id="github" name="github" type="text" placeholder="octocat" />
-            </div>
-
-            <div class="field">
-              <label for="linkedin">LinkedIn URL</label>
-              <input
-                id="linkedin"
-                name="linkedin"
-                type="url"
-                placeholder="https://www.linkedin.com/in/your-handle"
-              />
-            </div>
-
-            <div class="field">
-              <label for="leetcode">LeetCode username</label>
-              <input id="leetcode" name="leetcode" type="text" placeholder="your-handle" />
-            </div>
-
-            <div class="field">
-              <label for="otherLinks">Other links</label>
-              <textarea
-                id="otherLinks"
-                name="otherLinks"
-                rows="2"
-                placeholder="Portfolio, Dev.to, Codeforces, personal blog (one per line)"
-              ></textarea>
-            </div>
-
-            <div class="field field-full">
-              <label for="bio">Short bio / summary</label>
-              <textarea
-                id="bio"
-                name="bio"
-                rows="3"
-                placeholder="A few sentences about your experience, tech stack, and what you’re looking for."
-              ></textarea>
-            </div>
-
-            <div class="actions">
-              <button type="submit" class="btn primary">Save profile</button>
-              <button type="button" id="resetProfile" class="btn ghost">Reset</button>
-            </div>
-            <p id="profile-status" class="status-text" aria-live="polite"></p>
-          </form>
-
-          <div class="divider"></div>
-
-          <div>
-            <h3>Public portfolio view</h3>
-            <p class="section-help">
-              This is how your links and basic information will appear to visitors.
+            <h2 class="hero-title">Hi, I’m Your Name — aspiring AI & Data Science engineer.</h2>
+            <p class="hero-subtitle">
+              I build intelligent applications, explore machine learning, and enjoy solving real‑world
+              problems with data and clean engineering practices.
             </p>
-            <div id="portfolio-preview" class="preview-card"></div>
+
+            <div class="hero-meta">
+              <span class="chip">Python · Flask · Pandas</span>
+              <span class="chip">Machine Learning & Data Analysis</span>
+              <span class="chip">GitHub · LeetCode · Hackathons</span>
+            </div>
+
+            <div class="hero-actions">
+              <a href="mailto:youremail@example.com" class="btn btn-primary">Contact me</a>
+              <a href="#projects" class="btn btn-outline">View projects</a>
+            </div>
+
+            <div class="sections" id="projects">
+              <div class="section-card">
+                <h3>Highlighted Projects</h3>
+                <ul>
+                  <li>Symposium management app (Flask + Excel backend)</li>
+                  <li>AI‑powered resume and portfolio generator</li>
+                  <li>Data analysis dashboards using Pandas & Matplotlib</li>
+                </ul>
+              </div>
+              <div class="section-card">
+                <h3>Online Profiles</h3>
+                <ul>
+                  <li>GitHub: <a href="#" target="_blank">your‑github</a></li>
+                  <li>LinkedIn: <a href="#" target="_blank">your‑linkedin</a></li>
+                  <li>LeetCode: <a href="#" target="_blank">your‑leetcode</a></li>
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section class="card ai-card">
-          <h2>AI‑Powered Resume</h2>
-          <p class="section-help">
-            Use your profile and links as context, then let an AI model draft a tailored resume.
-            Your API key is stored only in this browser session and never sent anywhere except the
-            AI provider you choose.
-          </p>
+        <!-- Right: AI chatbot -->
+        <section class="card" id="chat">
+          <div class="chat-panel">
+            <div class="chat-header">
+              <div>
+                <h2>AI Chatbot Assistant</h2>
+                <p class="chat-tagline">
+                  Ask questions about my skills, projects, or get help with code & ideas.
+                </p>
+              </div>
+            </div>
 
-          <div class="field">
-            <label for="modelProvider">Model provider</label>
-            <select id="modelProvider" name="modelProvider">
-              <option value="openai">OpenAI compatible (e.g. OpenAI, Together, etc.)</option>
-            </select>
-          </div>
+            <div class="chat-settings">
+              <label>
+                API base URL
+                <input
+                  id="apiBase"
+                  type="text"
+                  placeholder="https://api.openai.com"
+                  value="https://api.openai.com"
+                />
+              </label>
+              <label>
+                Model
+                <input
+                  id="model"
+                  type="text"
+                  placeholder="gpt-4.1-mini"
+                  value="gpt-4.1-mini"
+                />
+              </label>
+              <label>
+                API key
+                <input
+                  id="apiKey"
+                  type="password"
+                  placeholder="sk-..."
+                  autocomplete="off"
+                />
+              </label>
+              <span style="font-size: 11px; color: var(--fg-muted); align-self: center;">
+                Your key stays in this browser only. Never share it publicly.
+              </span>
+            </div>
 
-          <div class="field">
-            <label for="apiBaseUrl">API base URL</label>
-            <input
-              id="apiBaseUrl"
-              name="apiBaseUrl"
-              type="url"
-              placeholder="https://api.openai.com"
-            />
-          </div>
+            <div class="chat-window" id="chatWindow"></div>
 
-          <div class="field">
-            <label for="apiKey">API key</label>
-            <input
-              id="apiKey"
-              name="apiKey"
-              type="password"
-              autocomplete="off"
-              placeholder="sk-..."
-            />
-          </div>
+            <div class="chat-input-row">
+              <textarea
+                id="userInput"
+                placeholder="Ask anything about my profile, tech stack, or code..."
+              ></textarea>
+              <button class="btn btn-primary" id="sendBtn">Send</button>
+            </div>
 
-          <div class="field">
-            <label for="modelName">Model name</label>
-            <input
-              id="modelName"
-              name="modelName"
-              type="text"
-              placeholder="gpt-4.1-mini"
-            />
-          </div>
-
-          <div class="field">
-            <label for="roleTarget">Target role / industry</label>
-            <input
-              id="roleTarget"
-              name="roleTarget"
-              type="text"
-              placeholder="Frontend engineer in fintech, remote"
-            />
-          </div>
-
-          <div class="field">
-            <label for="extraInstructions">Extra instructions for the AI</label>
-            <textarea
-              id="extraInstructions"
-              name="extraInstructions"
-              rows="3"
-              placeholder="Tone (e.g. concise, achievement‑focused), specific technologies, seniority level, or company types."
-            ></textarea>
-          </div>
-
-          <div class="actions">
-            <button id="generateResume" class="btn primary">Generate resume</button>
-            <button id="copyResume" class="btn ghost" disabled>Copy to clipboard</button>
-          </div>
-
-          <p id="ai-status" class="status-text" aria-live="polite"></p>
-
-          <div class="resume-output-wrapper">
-            <textarea
-              id="resumeOutput"
-              class="resume-output"
-              placeholder="The generated resume will appear here..."
-            ></textarea>
+            <div class="chat-footer">
+              <span class="status" id="statusText"></span>
+            </div>
           </div>
         </section>
       </main>
-
-      <footer class="footer">
-        <span>Built with HTML, CSS & vanilla JS.</span>
-      </footer>
     </div>
 
-    <script src="app.js"></script>
+    <script>
+      const chatWindow = document.getElementById("chatWindow");
+      const userInput = document.getElementById("userInput");
+      const statusText = document.getElementById("statusText");
+      const sendBtn = document.getElementById("sendBtn");
+
+      const SYSTEM_PROMPT =
+        "You are a helpful AI assistant representing a student in Artificial Intelligence and Data Science. " +
+        "Answer questions in a clear, friendly and professional way. " +
+        "If asked about projects or skills, give reasonable examples for an AI & DS student portfolio.";
+
+      const messages = [{ role: "system", content: SYSTEM_PROMPT }];
+
+      function appendMessage(role, content) {
+        const div = document.createElement("div");
+        div.className = "chat-message " + (role === "user" ? "user" : "assistant");
+        div.textContent = content;
+        chatWindow.appendChild(div);
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+      }
+
+      async function sendMessage() {
+        const text = userInput.value.trim();
+        if (!text) return;
+
+        const apiKey = document.getElementById("apiKey").value.trim();
+        const apiBase = document.getElementById("apiBase").value.trim() || "https://api.openai.com";
+        const model = document.getElementById("model").value.trim() || "gpt-4.1-mini";
+
+        if (!apiKey) {
+          statusText.textContent = "Please enter your API key first.";
+          return;
+        }
+
+        userInput.value = "";
+        appendMessage("user", text);
+        messages.push({ role: "user", content: text });
+
+        sendBtn.disabled = true;
+        statusText.textContent = "Thinking...";
+
+        try {
+          const res = await fetch(apiBase.replace(/\/+$/, "") + "/v1/chat/completions", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + apiKey,
+            },
+            body: JSON.stringify({
+              model,
+              messages,
+            }),
+          });
+
+          if (!res.ok) {
+            const t = await res.text();
+            throw new Error("API error " + res.status + ": " + t.slice(0, 200));
+          }
+
+          const data = await res.json();
+          const content =
+            data.choices?.[0]?.message?.content ||
+            "No reply received. Check your model and API key.";
+
+          messages.push({ role: "assistant", content });
+          appendMessage("assistant", content);
+          statusText.textContent = "";
+        } catch (err) {
+          console.error(err);
+          statusText.textContent = "Failed to call the AI API. Check console for details.";
+        } finally {
+          sendBtn.disabled = false;
+        }
+      }
+
+      sendBtn.addEventListener("click", sendMessage);
+      userInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage();
+        }
+      });
+
+      appendMessage(
+        "assistant",
+        "Hi! I’m your AI assistant for this portfolio. Ask me about skills, projects, or anything you’d like to know."
+      );
+    </script>
   </body>
   </html>
 
