@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h2>Admin &mdash; Participants Overview</h2>
+  <p class="help-text">
+    View all registered participants, their Round 1 and Round 2 scores, and the computed final ranking.
+  </p>
+
+  <div class="admin-actions">
+    <a href="{{ url_for('download_excel') }}" class="btn primary">Download Excel File</a>
+    <a href="{{ url_for('admin_logout') }}" class="btn secondary">Logout</a>
+  </div>
+
+  {% if participants %}
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>College</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Round 1 Score</th>
+          <th>Time Taken (s)</th>
+          <th>Round 2 Score</th>
+          <th>Final Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in participants %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ p.name }}</td>
+          <td>{{ p.college }}</td>
+          <td>{{ p.email }}</td>
+          <td>{{ p.phone }}</td>
+          <td>{{ p.round1_score or 0 }}</td>
+          <td>{{ p.time_taken_seconds or '-' }}</td>
+          <td>{{ p.round2_score or 0 }}</td>
+          <td>{{ "%.2f"|format(p.final_score) }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p>No participants registered yet.</p>
+  {% endif %}
+</section>
+{% endblock %}
+

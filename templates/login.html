@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Login - AI & DS Symposium{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h2>Participant Login</h2>
+  <p class="help-text">
+    Login with the email and phone number used during registration.
+  </p>
+
+  {% if message %}
+  <div class="info-box">{{ message }}</div>
+  {% endif %}
+
+  <form method="post" class="form-grid">
+    <div class="form-field">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+    </div>
+
+    <div class="form-field">
+      <label for="phone">Phone</label>
+      <input type="text" id="phone" name="phone" required />
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn primary">Login</button>
+      <a href="{{ url_for('register') }}" class="btn secondary">Go to Registration</a>
+    </div>
+  </form>
+</section>
+{% endblock %}
+

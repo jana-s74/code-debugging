@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - AI & DS Symposium{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h2>Welcome, {{ name }}!</h2>
+  <p class="help-text">
+    This is your symposium dashboard. Please complete the rounds as instructed by the coordinators.
+  </p>
+
+  <div class="dashboard-actions">
+    <a href="{{ url_for('round1') }}" class="btn primary">Start Round 1 (MCQ)</a>
+    <a href="{{ url_for('round2') }}" class="btn secondary">Go to Round 2 (Debugging)</a>
+  </div>
+</section>
+{% endblock %}
+

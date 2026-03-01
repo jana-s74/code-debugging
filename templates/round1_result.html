@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Round 1 Result{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h2>Round 1 Result</h2>
+  <p class="help-text">
+    Your answers have been submitted.
+  </p>
+
+  <div class="result-box">
+    <p><strong>Score:</strong> {{ score }} / {{ total }}</p>
+  </div>
+
+  <div class="dashboard-actions">
+    <a href="{{ url_for('dashboard') }}" class="btn primary">Back to Dashboard</a>
+    <a href="{{ url_for('round2') }}" class="btn secondary">Go to Round 2</a>
+  </div>
+</section>
+{% endblock %}
+

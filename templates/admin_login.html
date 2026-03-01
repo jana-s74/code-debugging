@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h2>Admin Login</h2>
+  <p class="help-text">
+    This page is for event coordinators only.
+  </p>
+
+  <form method="post" class="form-grid">
+    <div class="form-field">
+      <label for="password">Admin Password</label>
+      <input type="password" id="password" name="password" required />
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn primary">Login as Admin</button>
+    </div>
+  </form>
+</section>
+{% endblock %}
+

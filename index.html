@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Developer Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="top-bar">
+        <div class="brand">
+          <div class="brand-mark">P</div>
+          <div class="brand-text">
+            <div class="brand-title">Portfolio Hub</div>
+            <div class="brand-subtitle">Profiles, projects & AI resume</div>
+          </div>
+        </div>
+      </header>
+
+      <main class="main-layout">
+        <section class="card profile-card">
+          <h2>Profile & Links</h2>
+          <p class="section-help">
+            Add your handles and links. This page will show them as a clean
+            portfolio and use them as context for your AI‑generated resume.
+          </p>
+
+          <form id="profile-form" class="form-grid">
+            <div class="field">
+              <label for="fullName">Full name</label>
+              <input id="fullName" name="fullName" type="text" placeholder="Ada Lovelace" />
+            </div>
+
+            <div class="field">
+              <label for="headline">Headline</label>
+              <input
+                id="headline"
+                name="headline"
+                type="text"
+                placeholder="Full‑stack developer | React, Node, AI"
+              />
+            </div>
+
+            <div class="field">
+              <label for="github">GitHub username</label>
+              <input id="github" name="github" type="text" placeholder="octocat" />
+            </div>
+
+            <div class="field">
+              <label for="linkedin">LinkedIn URL</label>
+              <input
+                id="linkedin"
+                name="linkedin"
+                type="url"
+                placeholder="https://www.linkedin.com/in/your-handle"
+              />
+            </div>
+
+            <div class="field">
+              <label for="leetcode">LeetCode username</label>
+              <input id="leetcode" name="leetcode" type="text" placeholder="your-handle" />
+            </div>
+
+            <div class="field">
+              <label for="otherLinks">Other links</label>
+              <textarea
+                id="otherLinks"
+                name="otherLinks"
+                rows="2"
+                placeholder="Portfolio, Dev.to, Codeforces, personal blog (one per line)"
+              ></textarea>
+            </div>
+
+            <div class="field field-full">
+              <label for="bio">Short bio / summary</label>
+              <textarea
+                id="bio"
+                name="bio"
+                rows="3"
+                placeholder="A few sentences about your experience, tech stack, and what you’re looking for."
+              ></textarea>
+            </div>
+
+            <div class="actions">
+              <button type="submit" class="btn primary">Save profile</button>
+              <button type="button" id="resetProfile" class="btn ghost">Reset</button>
+            </div>
+            <p id="profile-status" class="status-text" aria-live="polite"></p>
+          </form>
+
+          <div class="divider"></div>
+
+          <div>
+            <h3>Public portfolio view</h3>
+            <p class="section-help">
+              This is how your links and basic information will appear to visitors.
+            </p>
+            <div id="portfolio-preview" class="preview-card"></div>
+          </div>
+        </section>
+
+        <section class="card ai-card">
+          <h2>AI‑Powered Resume</h2>
+          <p class="section-help">
+            Use your profile and links as context, then let an AI model draft a tailored resume.
+            Your API key is stored only in this browser session and never sent anywhere except the
+            AI provider you choose.
+          </p>
+
+          <div class="field">
+            <label for="modelProvider">Model provider</label>
+            <select id="modelProvider" name="modelProvider">
+              <option value="openai">OpenAI compatible (e.g. OpenAI, Together, etc.)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="apiBaseUrl">API base URL</label>
+            <input
+              id="apiBaseUrl"
+              name="apiBaseUrl"
+              type="url"
+              placeholder="https://api.openai.com"
+            />
+          </div>
+
+          <div class="field">
+            <label for="apiKey">API key</label>
+            <input
+              id="apiKey"
+              name="apiKey"
+              type="password"
+              autocomplete="off"
+              placeholder="sk-..."
+            />
+          </div>
+
+          <div class="field">
+            <label for="modelName">Model name</label>
+            <input
+              id="modelName"
+              name="modelName"
+              type="text"
+              placeholder="gpt-4.1-mini"
+            />
+          </div>
+
+          <div class="field">
+            <label for="roleTarget">Target role / industry</label>
+            <input
+              id="roleTarget"
+              name="roleTarget"
+              type="text"
+              placeholder="Frontend engineer in fintech, remote"
+            />
+          </div>
+
+          <div class="field">
+            <label for="extraInstructions">Extra instructions for the AI</label>
+            <textarea
+              id="extraInstructions"
+              name="extraInstructions"
+              rows="3"
+              placeholder="Tone (e.g. concise, achievement‑focused), specific technologies, seniority level, or company types."
+            ></textarea>
+          </div>
+
+          <div class="actions">
+            <button id="generateResume" class="btn primary">Generate resume</button>
+            <button id="copyResume" class="btn ghost" disabled>Copy to clipboard</button>
+          </div>
+
+          <p id="ai-status" class="status-text" aria-live="polite"></p>
+
+          <div class="resume-output-wrapper">
+            <textarea
+              id="resumeOutput"
+              class="resume-output"
+              placeholder="The generated resume will appear here..."
+            ></textarea>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>Built with HTML, CSS & vanilla JS.</span>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+  </html>
+

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Round 2 - Debugging{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h2>Round 2 &mdash; Debugging</h2>
+  <p class="help-text">
+    Read the buggy programs and type your corrected code in the text areas.
+    The organizers will evaluate your corrections and update the score later.
+  </p>
+
+  {% if message %}
+  <div class="info-box">{{ message }}</div>
+  {% endif %}
+
+  <form method="post" class="debug-form">
+    <div class="debug-question">
+      <h3>Buggy Program 1</h3>
+      <pre class="code-block">{{ buggy_program1 }}</pre>
+      <label for="answer1">Your corrected code:</label>
+      <textarea id="answer1" name="answer1" rows="6" required></textarea>
+    </div>
+
+    <div class="debug-question">
+      <h3>Buggy Program 2</h3>
+      <pre class="code-block">{{ buggy_program2 }}</pre>
+      <label for="answer2">Your corrected code:</label>
+      <textarea id="answer2" name="answer2" rows="6" required></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn primary">Submit Round 2</button>
+      <a href="{{ url_for('dashboard') }}" class="btn secondary">Back to Dashboard</a>
+    </div>
+  </form>
+</section>
+{% endblock %}
+

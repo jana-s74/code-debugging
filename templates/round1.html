@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Round 1 - MCQ{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h2>Round 1 &mdash; MCQ</h2>
+  <p class="help-text">
+    Answer all questions. You have <strong>{{ duration_seconds // 60 }} minutes</strong>.
+    The quiz will auto-submit when the timer ends.
+  </p>
+
+  <div class="timer-box">
+    Time remaining:
+    <span id="timer-display"></span>
+  </div>
+
+  <form id="round1-form" method="post">
+    {% for q in questions %}
+    <div class="question">
+      <p class="question-text">
+        <strong>Q{{ loop.index }}.</strong> {{ q.question }}
+      </p>
+      <div class="options">
+        {% for opt in q.options %}
+        <label class="option">
+          <input
+            type="radio"
+            name="q{{ q.id }}"
+            value="{{ opt }}"
+          />
+          <span>{{ opt }}</span>
+        </label>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+
+    <div class="form-actions">
+      <button type="submit" class="btn primary">Submit Now</button>
+    </div>
+  </form>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const durationSeconds = {{ duration_seconds|int }};
+</script>
+<script src="{{ url_for('static', filename='round1_timer.js') }}"></script>
+{% endblock %}
+
